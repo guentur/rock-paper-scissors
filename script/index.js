@@ -1,3 +1,7 @@
+function showWinnerMessage(winner) {
+    
+}
+
 /**
  * 
  * string params case-insensitive
@@ -24,18 +28,51 @@ function playRound(playerSelection, computerSelection) {
     
 }
 
-// Как сравнить 2 строки
-function getWinner(playerSelection, computerSelection) {
-    const gameState = `${playerSelection}-${computerSelection}`;
+/**
+ * scissors-rock
+ * 
+ * 
+ * 
+ */
+function GameRules() {
     let rockWinner = 'rock-scissors';
     let scissorsWinner = 'scissors-paper';
     let paperWinner = 'paper-rock';
+
+    this.winnerCombinations = [];
+    this.winnerCombinations.push(rockWinner);
+    this.winnerCombinations.push(scissorsWinner);
+    this.winnerCombinations.push(paperWinner);
+
+    this.iterateForPossibleWinner = function(selection) {
+        /**
+         * compare selection and winner combinations
+         * return array of combinations that contains selection
+         * compare each string from the array with the other selection
+         * return the rule which passed the second comparison.
+         * Cut the first part of the returned string. That will be the winner.
+         */
+        
+        const selectionCombination = [];
+        for (let i = 0; i < this.winnerCombinations.length; i++) {
+            const combination = this.winnerCombinations[i];
+
+            if (combination.test) {
+
+            }
+        }
+    }
+}
+
+// Как сравнить 2 строки
+function getWinner(playerSelection, computerSelection) {
+    const gameState = `${playerSelection}-${computerSelection}`;
 
     if (rockWinner.test()) {
 
         return playerSelection;
     }
-    
+
 }
 
 function getComputerChoice() {
