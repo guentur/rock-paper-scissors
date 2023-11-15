@@ -7,10 +7,11 @@
  * @returns {string} 
  */
 function playRound(playerSelection, computerSelection) {
-    //parameters Case-insensitive
+    let lowPlayerSelection = playerSelection.toLowerCase();
+    let lowComputerSelection = computerSelection.toLowerCase();
 
-    // function get winner
-    let winner = 'computer';
+    const winner = getWinner(lowPlayerSelection, lowComputerSelection);
+
 
     switch (winner) {
         case 'computer':
