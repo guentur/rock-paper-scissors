@@ -23,6 +23,10 @@ function playRound(playerSelection, computerSelection) {
     
 }
 
+function getComputerChoice() {
+    let randomChoice = getRandomNum(1, 4)
+}
+
 const playerSelection = 'rock';
 const computerSelection = getComputerChoice();
 
