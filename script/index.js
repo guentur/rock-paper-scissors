@@ -24,6 +24,20 @@ function playRound(playerSelection, computerSelection) {
     
 }
 
+// Как сравнить 2 строки
+function getWinner(playerSelection, computerSelection) {
+    const gameState = `${playerSelection}-${computerSelection}`;
+    let rockWinner = 'rock-scissors';
+    let scissorsWinner = 'scissors-paper';
+    let paperWinner = 'paper-rock';
+
+    if (rockWinner.test()) {
+
+        return playerSelection;
+    }
+    
+}
+
 function getComputerChoice() {
     let randomChoice = getRandomNum(1, 3);
 
