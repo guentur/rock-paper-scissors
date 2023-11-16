@@ -1,3 +1,13 @@
+let rockWinner = 'rock-scissors';
+let scissorsWinner = 'scissors-paper';
+let paperWinner = 'paper-rock';
+
+this.winnerCombinations = [];
+this.winnerCombinations.push(rockWinner);
+this.winnerCombinations.push(scissorsWinner);
+this.winnerCombinations.push(paperWinner);
+
+
 function showWinnerMessage(winner) {
     
 }
@@ -20,54 +30,16 @@ function playRound(playerSelection, computerSelection) {
     const winner = getWinner(lowPlayerSelection, lowComputerSelection);
 
 
-    switch (winner) {
-        case 'computer':
-            return `You Lose! ${computerSelection} beats ${playerSelection}`
+    // switch (winner) {
+    //     case 'computer':
+    //         return `You Lose! ${computerSelection} beats ${playerSelection}`
             
-        case 'player':
-            return 
-        default:
-            break;
-    }
+    //     case 'player':
+    //         return 
+    //     default:
+    //         break;
+    // }
     
-}
-
-function GameRules() {
-    let rockWinner = 'rock-scissors';
-    let scissorsWinner = 'scissors-paper';
-    let paperWinner = 'paper-rock';
-
-    this.winnerCombinations = [];
-    this.winnerCombinations.push(rockWinner);
-    this.winnerCombinations.push(scissorsWinner);
-    this.winnerCombinations.push(paperWinner);
-
-    /**
-     * @param {string} selectionFirst 
-     * @param {string} selectionSecond 
-     */
-    this.iterateForPossibleWinner = function(selectionFirst, selectionSecond) {
-        /**
-         * compare selection and winner combinations
-         * return array of combinations that contains selection
-         * compare each string from the array with the other selection
-         * return the rule which passed the second comparison.
-         * Cut the first part of the returned string. That will be the winner.
-         */
-        for (let i = 0; i < this.winnerCombinations.length; i++) {
-            const combination = this.winnerCombinations[i];
-
-            if (combination.includes(selectionFirst) 
-                && combination.includes(selectionSecond)
-            ) {
-                if (combination.startsWith(selectionFirst)) {
-                    return selectionFirst;
-                } else {
-                    return selectionSecond;
-                }
-            }
-        }
-    }
 }
 
 /**
@@ -82,9 +54,26 @@ function GameRules() {
  * @returns 
  */
 function getWinner(playerSelection, computerSelection) {
-    
+    /**
+     * compare selection and winner combinations
+     * return array of combinations that contains selection
+     * compare each string from the array with the other selection
+     * return the rule which passed the second comparison.
+     * Cut the first part of the returned string. That will be the winner.
+     */
+    for (let i = 0; i < this.winnerCombinations.length; i++) {
+        const combination = this.winnerCombinations[i];
 
-    return 
+        if (combination.includes(playerSelection) 
+            && combination.includes(computerSelection)
+        ) {
+            if (combination.startsWith(playerSelection)) {
+                return playerSelection;
+            } else if (combination.startsWith(computerSelection)) {
+                return computerSelection;
+            }
+        }
+    }
 }
 
 function getComputerChoice() {
