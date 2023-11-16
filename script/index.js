@@ -14,6 +14,9 @@ function playRound(playerSelection, computerSelection) {
     let lowPlayerSelection = playerSelection.toLowerCase();
     let lowComputerSelection = computerSelection.toLowerCase();
 
+    if (lowPlayerSelection === lowComputerSelection) {
+        return 'It\'s a tie!';
+    }
     const winner = getWinner(lowPlayerSelection, lowComputerSelection);
 
 
@@ -21,19 +24,14 @@ function playRound(playerSelection, computerSelection) {
         case 'computer':
             return `You Lose! ${computerSelection} beats ${playerSelection}`
             
-        case
+        case 'player':
+            return 
         default:
             break;
     }
     
 }
 
-/**
- * scissors-rock
- * 
- * 
- * 
- */
 function GameRules() {
     let rockWinner = 'rock-scissors';
     let scissorsWinner = 'scissors-paper';
@@ -44,7 +42,11 @@ function GameRules() {
     this.winnerCombinations.push(scissorsWinner);
     this.winnerCombinations.push(paperWinner);
 
-    this.iterateForPossibleWinner = function(selection) {
+    /**
+     * @param {string} selectionFirst 
+     * @param {string} selectionSecond 
+     */
+    this.iterateForPossibleWinner = function(selectionFirst, selectionSecond) {
         /**
          * compare selection and winner combinations
          * return array of combinations that contains selection
@@ -52,27 +54,37 @@ function GameRules() {
          * return the rule which passed the second comparison.
          * Cut the first part of the returned string. That will be the winner.
          */
-        
-        const selectionCombination = [];
         for (let i = 0; i < this.winnerCombinations.length; i++) {
             const combination = this.winnerCombinations[i];
 
-            if (combination.test) {
-
+            if (combination.includes(selectionFirst) 
+                && combination.includes(selectionSecond)
+            ) {
+                if (combination.startsWith(selectionFirst)) {
+                    return selectionFirst;
+                } else {
+                    return selectionSecond;
+                }
             }
         }
     }
 }
 
-// Как сравнить 2 строки
+/**
+ * 
+* test:
+* selection1 scissors, rock
+* scissors, scissors
+* scissors, paper
+*
+ * @param {string} playerSelection 
+ * @param {string} computerSelection 
+ * @returns 
+ */
 function getWinner(playerSelection, computerSelection) {
-    const gameState = `${playerSelection}-${computerSelection}`;
+    
 
-    if (rockWinner.test()) {
-
-        return playerSelection;
-    }
-
+    return 
 }
 
 function getComputerChoice() {
