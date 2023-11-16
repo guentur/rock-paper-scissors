@@ -2,15 +2,10 @@ let rockWinner = 'rock-scissors';
 let scissorsWinner = 'scissors-paper';
 let paperWinner = 'paper-rock';
 
-this.winnerCombinations = [];
-this.winnerCombinations.push(rockWinner);
-this.winnerCombinations.push(scissorsWinner);
-this.winnerCombinations.push(paperWinner);
-
-
-function showWinnerMessage(winner) {
-    
-}
+winnerCombinations = [];
+winnerCombinations.push(rockWinner);
+winnerCombinations.push(scissorsWinner);
+winnerCombinations.push(paperWinner);
 
 /**
  * 
@@ -29,17 +24,9 @@ function playRound(playerSelection, computerSelection) {
     }
     const winner = getWinner(lowPlayerSelection, lowComputerSelection);
 
-
-    // switch (winner) {
-    //     case 'computer':
-    //         return `You Lose! ${computerSelection} beats ${playerSelection}`
-            
-    //     case 'player':
-    //         return 
-    //     default:
-    //         break;
-    // }
+    const firstLetterUpper = winner[0].toUpperCase() + winner.slice(1);
     
+    return `Winner's choice: ${firstLetterUpper}`; 
 }
 
 /**
@@ -48,6 +35,7 @@ function playRound(playerSelection, computerSelection) {
 * selection1 scissors, rock
 * scissors, scissors
 * scissors, paper
+* rock, abracadabra
 *
  * @param {string} playerSelection 
  * @param {string} computerSelection 
@@ -61,8 +49,8 @@ function getWinner(playerSelection, computerSelection) {
      * return the rule which passed the second comparison.
      * Cut the first part of the returned string. That will be the winner.
      */
-    for (let i = 0; i < this.winnerCombinations.length; i++) {
-        const combination = this.winnerCombinations[i];
+    for (let i = 0; i < winnerCombinations.length; i++) {
+        const combination = winnerCombinations[i];
 
         if (combination.includes(playerSelection) 
             && combination.includes(computerSelection)
