@@ -1,33 +1,11 @@
-let rockWinner = 'rock-scissors';
-let scissorsWinner = 'scissors-paper';
-let paperWinner = 'paper-rock';
+let rockWinner = `rock-scissors`;
+let scissorsWinner = `scissors-paper`;
+let paperWinner = `paper-rock`;
 
 winnerCombinations = [];
 winnerCombinations.push(rockWinner);
 winnerCombinations.push(scissorsWinner);
 winnerCombinations.push(paperWinner);
-
-/**
- * 
- * string params case-insensitive
- * @param {string} playerSelection 
- * @param {string} computerSelection 
- * 
- * @returns {string} 
- */
-function playRound(playerSelection, computerSelection) {
-    let lowPlayerSelection = playerSelection.toLowerCase();
-    let lowComputerSelection = computerSelection.toLowerCase();
-
-    if (lowPlayerSelection === lowComputerSelection) {
-        return 'It\'s a tie!';
-    }
-    const winner = getWinner(lowPlayerSelection, lowComputerSelection);
-
-    const firstLetterUpper = winner[0].toUpperCase() + winner.slice(1);
-    
-    return `Winner's choice: ${firstLetterUpper}`; 
-}
 
 /**
  * 
@@ -69,17 +47,57 @@ function getComputerChoice() {
 
     switch(randomChoice) {
         case 1:
-            return 'Rock';
+            return `Rock`;
         case 2:
-            return 'Paper';
+            return `Paper`;
         case 3:
-            return 'Scissors';
+            return `Scissors`;
         default:
-            return 'Abracadabra';
+            return `Abracadabra`;
     }
 }
 
-const playerSelection = 'rock';
-const computerSelection = getComputerChoice();
+/**
+ * 
+ * string params case-insensitive
+ * @param {string} playerSelection 
+ * @param {string} computerSelection 
+ * 
+ * @returns {string} 
+ */
+function playRound(playerSelection, computerSelection) {
+    let lowPlayerSelection = playerSelection.toLowerCase();
+    let lowComputerSelection = computerSelection.toLowerCase();
 
-console.log(playRound(playerSelection, computerSelection));
+    if (lowPlayerSelection === lowComputerSelection) {
+        return `It\'s a tie!`;
+    }
+    const winner = getWinner(lowPlayerSelection, lowComputerSelection);
+
+    const firstLetterUpper = winner[0].toUpperCase() + winner.slice(1);
+    
+    return `Winner's choice: ${firstLetterUpper}`; 
+}
+
+// function getResultMessage()
+
+/**
+ * Cycle a loop 5 times
+ * get player selection by prompt
+ * set the selections to playRound function
+ * get the result
+ */
+function game() {
+    const numberOfGames = 5;
+    let i = 0;
+    while (i < numberOfGames) {
+        const playerSelection = prompt(`Your choice. Default is \"Scissors\"`, `Scissors`);
+        const computerSelection = getComputerChoice();
+
+        playRound(playerSelection, computerSelection);
+        i++;
+    }
+}
+
+game();
+
