@@ -20,6 +20,9 @@ winnerCombinations.push(paperWinner);
  * @returns 
  */
 function getWinner(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return `tie`;
+    }
     /**
      * compare selection and winner combinations
      * return array of combinations that contains selection
@@ -57,6 +60,10 @@ function getComputerChoice() {
     }
 }
 
+function firstLetterToUpperCase(string) {
+    return string[0].toUpperCase() + string.slice(1);
+}
+
 /**
  * 
  * string params case-insensitive
@@ -69,14 +76,8 @@ function playRound(playerSelection, computerSelection) {
     let lowPlayerSelection = playerSelection.toLowerCase();
     let lowComputerSelection = computerSelection.toLowerCase();
 
-    if (lowPlayerSelection === lowComputerSelection) {
-        return `It\'s a tie!`;
-    }
     const winner = getWinner(lowPlayerSelection, lowComputerSelection);
-
-    const firstLetterUpper = winner[0].toUpperCase() + winner.slice(1);
-    
-    return `Winner's choice: ${firstLetterUpper}`; 
+    return winner;
 }
 
 // function getResultMessage()
@@ -94,9 +95,22 @@ function game() {
         const playerSelection = prompt(`Your choice. Default is \"Scissors\"`, `Scissors`);
         const computerSelection = getComputerChoice();
 
-        playRound(playerSelection, computerSelection);
+        const winner = playRound(playerSelection, computerSelection);
+        showMessage(winner);
         i++;
     }
+}
+
+function showMessage(winner) {
+    let message = ``;
+    if (winner === `tie`) {
+        message = `It\'s a tie!`;
+    } else {
+        const firstLetterUpper = firstLetterToUpperCase(winner); 
+        message = `Winner's choice: ${firstLetterUpper}`; 
+    }
+
+    console.log(message);
 }
 
 game();
