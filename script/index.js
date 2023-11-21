@@ -7,6 +7,9 @@ winnerCombinations.push(rockWinner);
 winnerCombinations.push(scissorsWinner);
 winnerCombinations.push(paperWinner);
 
+const computerIdentifier = `computer`;
+const playerIdentifier = `player`;
+
 /**
  * 
 * test:
@@ -37,9 +40,9 @@ function getWinner(playerSelection, computerSelection) {
             && combination.includes(computerSelection)
         ) {
             if (combination.startsWith(playerSelection)) {
-                return playerSelection;
+                return playerIdentifier;
             } else if (combination.startsWith(computerSelection)) {
-                return computerSelection;
+                return computerIdentifier;
             }
         }
     }
@@ -64,9 +67,21 @@ function firstLetterToUpperCase(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
 
+function Player(title, selection) {
+    this.title = title;
+    this.selection = selection;
+}
+
 /**
  * 
  * string params case-insensitive
+ * 
+ * Set {
+ *  player,
+ * choice,
+ * 
+ * }
+ * 
  * @param {string} playerSelection 
  * @param {string} computerSelection 
  * 
@@ -76,13 +91,19 @@ function playRound(playerSelection, computerSelection) {
     let lowPlayerSelection = playerSelection.toLowerCase();
     let lowComputerSelection = computerSelection.toLowerCase();
 
+    // const player = new Player('Programmer', lowPlayerSelection);
+    // const computer = new Player('Computer', lowPlayerSelection);
+
     const winner = getWinner(lowPlayerSelection, lowComputerSelection);
+
     return winner;
 }
 
 // function getResultMessage()
 
 /**
+ * 
+ * 
  * Cycle a loop 5 times
  * get player selection by prompt
  * set the selections to playRound function
@@ -96,18 +117,22 @@ function game() {
         const computerSelection = getComputerChoice();
 
         const winner = playRound(playerSelection, computerSelection);
-        showMessage(winner);
+
+        showMessage(winner, playerSelection, computerSelection);
         i++;
     }
 }
 
-function showMessage(winner) {
+function showMessage(winner, playerSelection, computerSelection) {
     let message = ``;
     if (winner === `tie`) {
         message = `It\'s a tie!`;
-    } else {
-        const firstLetterUpper = firstLetterToUpperCase(winner); 
-        message = `Winner's choice: ${firstLetterUpper}`; 
+    } else if (winner === computerIdentifier) {
+        message = `You Lose! ${firstLetterToUpperCase(computerSelection)} 
+        beats ${firstLetterToUpperCase(playerSelection)}.`;
+    } else if (winner === playerIdentifier) {
+        message = `You are the Winner! ${firstLetterToUpperCase(playerIdentifier)} 
+        beats ${firstLetterToUpperCase(computerIdentifier)}.`;
     }
 
     console.log(message);
