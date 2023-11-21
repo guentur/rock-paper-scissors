@@ -9,6 +9,7 @@ winnerCombinations.push(paperWinner);
 
 const computerIdentifier = `computer`;
 const playerIdentifier = `player`;
+const tieIdentifier = `tie`;
 
 /**
  * 
@@ -24,7 +25,7 @@ const playerIdentifier = `player`;
  */
 function getWinner(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return `tie`;
+        return tieIdentifier;
     }
     /**
      * compare selection and winner combinations
@@ -112,20 +113,43 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     const numberOfGames = 5;
     let i = 0;
+    /**
+     * gameHistory{ 
+        * {
+        *  computerIdentifier,
+        *  playerIdentifier,
+        * }
+     * }
+     * 
+     */
+    // const gameScore = 
+
+    let computerScore = 0;
+    let playerScore = 0; 
+
     while (i < numberOfGames) {
         const playerSelection = prompt(`Your choice. Default is \"Scissors\"`, `Scissors`);
         const computerSelection = getComputerChoice();
 
         const winner = playRound(playerSelection, computerSelection);
 
+        if (winner === computerIdentifier) {
+            computerScore++;
+        } else if (winner === playerIdentifier) {
+            playerScore++;
+        }
+
+        // reports a winner or loser at the end.
         showMessage(winner, playerSelection, computerSelection);
         i++;
     }
+
+    showGameEndMessage(playerScore, computerScore);
 }
 
 function showMessage(winner, playerSelection, computerSelection) {
     let message = ``;
-    if (winner === `tie`) {
+    if (winner === tieIdentifier) {
         message = `It\'s a tie!`;
     } else if (winner === computerIdentifier) {
         message = `You Lose! ${firstLetterToUpperCase(computerSelection)} 
