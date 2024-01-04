@@ -20,9 +20,6 @@ winnerCombinations.push(paperWinner);
  * @returns 
  */
 function getWinner(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return `tie`;
-    }
     /**
      * compare selection and winner combinations
      * return array of combinations that contains selection
@@ -73,6 +70,11 @@ function firstLetterToUpperCase(string) {
  * @returns {string} 
  */
 function playRound(playerSelection, computerSelection) {
+    //if it's a TIE
+    if (playerSelection === computerSelection) {
+        return playRound(playerSelection, computerSelection);
+    }
+
     let lowPlayerSelection = playerSelection.toLowerCase();
     let lowComputerSelection = computerSelection.toLowerCase();
 
