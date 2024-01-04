@@ -87,19 +87,6 @@ function playRound() {
     }
 }
 
-
-
-// function getResultMessage()
-
-// Сохранить 
-
-function Player(playerId, playerChoice) {
-    this.id = playerId;
-    this.choice = playerChoice;
-}
-
-const score = new Map();
-
 function game() {
     const numberOfGames = 5;
     let i = 0;
