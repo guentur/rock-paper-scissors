@@ -20,9 +20,6 @@ winnerCombinations.push(paperWinner);
  * @returns 
  */
 function getWinner(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return `tie`;
-    }
     /**
      * compare selection and winner combinations
      * return array of combinations that contains selection
@@ -73,6 +70,11 @@ function firstLetterToUpperCase(string) {
  * @returns {string} 
  */
 function playRound(playerSelection, computerSelection) {
+    //if it's a TIE
+    if (playerSelection === computerSelection) {
+        return playRound(playerSelection, computerSelection);
+    }
+
     let lowPlayerSelection = playerSelection.toLowerCase();
     let lowComputerSelection = computerSelection.toLowerCase();
 
@@ -96,19 +98,16 @@ function game() {
         const computerSelection = getComputerChoice();
 
         const winner = playRound(playerSelection, computerSelection);
-        showMessage(winner);
+        showWinnerMessage(winner);
         i++;
     }
 }
 
-function showMessage(winner) {
+function showWinnerMessage(winner) {
     let message = ``;
-    if (winner === `tie`) {
-        message = `It\'s a tie!`;
-    } else {
-        const firstLetterUpper = firstLetterToUpperCase(winner); 
-        message = `Winner's choice: ${firstLetterUpper}`; 
-    }
+    
+    const firstLetterUpper = firstLetterToUpperCase(winner); 
+    message = `Winner's choice: ${firstLetterUpper}`; 
 
     console.log(message);
 }
