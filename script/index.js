@@ -1,11 +1,14 @@
-let rockWinner = `rock-scissors`;
-let scissorsWinner = `scissors-paper`;
-let paperWinner = `paper-rock`;
+const rockWinner = `rock-scissors`;
+const scissorsWinner = `scissors-paper`;
+const paperWinner = `paper-rock`;
 
 winnerCombinations = [];
 winnerCombinations.push(rockWinner);
 winnerCombinations.push(scissorsWinner);
 winnerCombinations.push(paperWinner);
+
+const playerSide = `player`;
+const computerSide = `computer`;
 
 /**
  * 
@@ -62,50 +65,72 @@ function firstLetterToUpperCase(string) {
 }
 
 /**
- * 
- * string params case-insensitive
- * @param {string} playerSelection 
- * @param {string} computerSelection 
- * 
- * @returns {string} 
+ * @returns {string} winner
  */
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+    const playerSelection = prompt(`Your choice. Default is \"Scissors\"`, `Scissors`).toLowerCase();
+    const computerSelection = getComputerChoice().toLowerCase();
+
     //if it's a TIE
     if (playerSelection === computerSelection) {
-        return playRound(playerSelection, computerSelection);
+        console.log(`It's a tie, so replay the round`)
+        playRound();
     }
 
-    let lowPlayerSelection = playerSelection.toLowerCase();
-    let lowComputerSelection = computerSelection.toLowerCase();
+    const winnerSelection = getWinner(playerSelection, computerSelection);
+    showRoundWinnerMessage(winnerSelection);
 
-    const winner = getWinner(lowPlayerSelection, lowComputerSelection);
-    return winner;
+    if (winnerSelection == playerSelection) {
+        return playerSide;
+    } else if (winnerSelection == computerSelection) {
+        return computerSide;
+    }
 }
+
+
 
 // function getResultMessage()
 
-/**
- * Cycle a loop 5 times
- * get player selection by prompt
- * set the selections to playRound function
- * get the result
- */
+// Сохранить 
+
+function Player(playerId, playerChoice) {
+    this.id = playerId;
+    this.choice = playerChoice;
+}
+
+const score = new Map();
+
 function game() {
     const numberOfGames = 5;
     let i = 0;
+    let playerScore = 0;
+    let computerScore = 0;
     while (i < numberOfGames) {
-        const playerSelection = prompt(`Your choice. Default is \"Scissors\"`, `Scissors`);
-        const computerSelection = getComputerChoice();
+        let winner = playRound();
 
-        const winner = playRound(playerSelection, computerSelection);
-        showWinnerMessage(winner);
+        if (winner === playerSide) {
+            playerScore++;
+        } else {
+            computerScore++;
+        }
+
         i++;
+    }
+    if (playerScore > computerScore) {
+        showGameWinnerMessage(playerSide);
+    } else {
+        showGameWinnerMessage(computerSide);
     }
 }
 
-function showWinnerMessage(winner) {
-    let message = ``;
-    
+function showGameWinnerMessage(winner) {
+    const firstLetterUpper = firstLetterToUpperCase(winner); 
+    message = `${firstLetterUpper}, you are the winner`; 
+
+    console.log(message);
+}
+
+function showRoundWinnerMessage(winner) {
     const firstLetterUpper = firstLetterToUpperCase(winner); 
     message = `Winner's choice: ${firstLetterUpper}`; 
 
