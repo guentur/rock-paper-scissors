@@ -88,11 +88,11 @@ function playRound() {
 }
 
 function game() {
-    const numberOfGames = 5;
+    const numberOfRounds = 5;
     let i = 0;
     let playerScore = 0;
     let computerScore = 0;
-    while (i < numberOfGames) {
+    while (i < numberOfRounds) {
         let winner = playRound();
 
         if (winner === playerSide) {
